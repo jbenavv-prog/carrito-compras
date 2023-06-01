@@ -1,11 +1,13 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import { ProductoCard } from "./components/productoCard";
 import { AlertaExito } from "../components/alertas";
 import { Layout } from "../layouts/layout";
+import CarritoContext from "../contexts/carritoContext";
 
 export default function Productos() {
   const [productos, actualizarProductos] = useState(null);
   const [alerta, actualizarAlerta] = useState(false);
+  const valorDelContexto = useContext(CarritoContext);
 
   useEffect(() => {
     async function llamarProductos() {
@@ -25,7 +27,7 @@ export default function Productos() {
     <Layout>
       <div className="flex justify-center mt-5">
         {alerta ? (
-          <AlertaExito mensaje="Se ha enviado el producto al carrito!!"></AlertaExito>
+          <AlertaExito mensaje={valorDelContexto}></AlertaExito>
         ) : (
           <></>
         )}
