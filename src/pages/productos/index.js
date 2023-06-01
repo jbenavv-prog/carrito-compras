@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { ProductoCard } from "./components/productoCard";
 import { AlertaExito } from "../components/alertas";
+import { Layout } from "../layouts/layout";
 
 export default function Productos() {
   const [productos, actualizarProductos] = useState(null);
@@ -21,7 +22,7 @@ export default function Productos() {
   }
 
   return (
-    <>
+    <Layout>
       <div className="flex justify-center mt-5">
         {alerta ? (
           <AlertaExito mensaje="Se ha enviado el producto al carrito!!"></AlertaExito>
@@ -43,6 +44,6 @@ export default function Productos() {
           <></>
         )}
       </div>
-    </>
+    </Layout>
   );
 }
