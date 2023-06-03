@@ -1,13 +1,29 @@
 import { Button, Checkbox, Label, Select, TextInput } from "flowbite-react";
 import { useRouter } from "next/router";
+import { useState } from "react";
+import { PagosModal } from "./components/pagosModal";
 
 export default function Pagos() {
   const router = useRouter();
   const { total } = router.query;
-  // console.log(total);
+  const [datosFormulario, setDatosFormulario] = useState({});
+  const [mostrarModal, setMostrarModal] = useState(false);
+
+  function obtenerDatos(event) {
+    event.preventDefault();
+
+    setDatosFormulario({
+      nombre: event.target.nombre.value,
+      correo: event.target.correo.value,
+      metodo: event.target.tipoPago.value,
+    });
+
+    setMostrarModal(true);
+  }
+
   return (
     <div className="flex justify-center items-center h-screen">
-      <form className="flex max-w-md flex-col gap-4">
+      <form className="flex max-w-md flex-col gap-4" onSubmit={obtenerDatos}>
         <div></div>
         <div>
           <div className="mb-2 block">
@@ -16,10 +32,10 @@ export default function Pagos() {
           <TextInput id="nombre" required shadow type="name" />
         </div>
         <div className="mb-2 block">
-          <Label htmlFor="email2" value="Correo Electrónico" />
+          <Label htmlFor="correo" value="Correo Electrónico" />
         </div>
         <TextInput
-          id="email2"
+          id="correo"
           placeholder="name@flowbite.com"
           required
           shadow
@@ -27,9 +43,9 @@ export default function Pagos() {
         />
         <div className="max-w-md" id="select">
           <div className="mb-2 block">
-            <Label htmlFor="tipo-pago" value="Selecciona un método de pago" />
+            <Label htmlFor="tipoPago" value="Selecciona un método de pago" />
           </div>
-          <Select id="tipo-pago" required>
+          <Select id="tipoPago" required>
             <option>Tarjeta de Crédito</option>
             <option>PSE Pagos</option>
             <option>Paypal</option>
@@ -40,11 +56,16 @@ export default function Pagos() {
           <Checkbox id="agree" />
           <Label className="flex" htmlFor="agree">
             <p>Aceptar términos y codiciones</p>
-          
           </Label>
         </div>
         <Button type="submit">Pagar ${total}</Button>
       </form>
+      {mostrarModal && (
+        <PagosModal
+          setMostrarModal={setMostrarModal}
+          form={datosFormulario}
+        ></PagosModal>
+      )}
     </div>
   );
 }

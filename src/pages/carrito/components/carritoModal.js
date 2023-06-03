@@ -37,7 +37,12 @@ export function CarritoModal({ setMostrarModal }) {
         <Button
           onClick={() => {
             setCargando(true);
-            router.push("/pagos");
+            router.push({
+              pathname: "/pagos/[total]",
+              query: {
+                total,
+              },
+            });
           }}
         >
           Total a Pagar: ${total}{" "}
