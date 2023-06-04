@@ -8,7 +8,7 @@ export function ProductoMiniCard({ producto }) {
         <p>{producto.nombre}</p>
       </h5>
       <p className="font-normal text-gray-700 dark:text-gray-400">
-        <p>${producto.precio}</p>
+        ${producto.precio}
       </p>
     </Card>
   );

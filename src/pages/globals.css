@@ -33,3 +33,18 @@ body {
   margin-right: 10px;
   margin-top: 10px;
 }
+
+/* .carousel {
+  position: relative;
+  width: 100%;
+} */
+
+.carousel > :first-child {
+  /* position: relative; */
+  height: 300px;
+}
+
+/* .carousel > :first-child > div > img {
+  width: 200px;
+} */
+

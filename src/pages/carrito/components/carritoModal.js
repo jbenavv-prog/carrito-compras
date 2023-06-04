@@ -29,14 +29,20 @@ export function CarritoModal({ setMostrarModal }) {
       <Modal.Header>Carrito De Compras</Modal.Header>
       <Modal.Body>
         {carritoProductosGlobal &&
-          carritoProductosGlobal.map((producto) => {
-            return <ProductoMiniCard producto={producto}></ProductoMiniCard>;
+          carritoProductosGlobal.map((producto, index) => {
+            return (
+              <ProductoMiniCard
+                key={index}
+                producto={producto}
+              ></ProductoMiniCard>
+            );
           })}
       </Modal.Body>
       <Modal.Footer>
         <Button
           onClick={() => {
             setCargando(true);
+            setMostrarModal(false);
             router.push({
               pathname: "/pagos/[total]",
               query: {
